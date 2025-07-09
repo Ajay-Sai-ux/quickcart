@@ -1,6 +1,6 @@
 'use client'
-import ProductCard from "@/components/ProductCard";
-import Navbar from "@/components/Navbar";
+import ProductCard from "@/components/ProductCard/ProductCard";
+import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
 

@@ -1,0 +1,123 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  max-width: 200px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  background-color: rgba(107, 114, 128, 0.1); // Tailwind's gray-500/10
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 13rem; // 52 * 0.25 = 13rem
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &:hover .productImage {
+    transform: scale(1.05);
+  }
+}
+
+.productImage {
+  transition: transform 0.2s ease;
+  object-fit: cover;
+  width: 80%;
+  height: 80%;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.heartBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.name {
+  font-weight: 500;
+  padding-top: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.description {
+  width: 100%;
+  font-size: 0.75rem;
+  color: rgba(107, 114, 128, 0.7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &Text {
+    font-size: 0.75rem;
+  }
+
+  &Stars {
+    display: flex;
+    gap: 0.125rem;
+
+    img {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+  }
+}
+
+.bottomRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.buyBtn {
+  padding: 0.375rem 1rem;
+  font-size: 0.75rem;
+  color: rgb(107, 114, 128);
+  border: 1px solid rgba(107, 114, 128, 0.2);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f8fafc;
+  }
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
