@@ -57,8 +57,7 @@ const Navbar = () => {
           </>
         ) : (
           <button onClick={openSignIn} className={styles.account}>
-            <Image src={assets.user_icon} alt="user icon" />
-            Account
+            Login / Sign Up
           </button>
         )}
       </ul>
@@ -85,8 +84,7 @@ const Navbar = () => {
           </>
         ) : (
           <button onClick={openSignIn} className={styles.account}>
-            <Image src={assets.user_icon} alt="user icon" />
-            Account
+            Login / Sign Up
           </button>
         )}
       </div>
