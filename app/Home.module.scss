@@ -1,9 +1,14 @@
 // styles/Home.module.scss
 .pageWrapper {
-  padding: 16px 24px;
+  padding: 16px 16px;
   max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
+
+   @media (min-width: 768px) {
+    padding: 16px 24px;
+  }
+
 }
