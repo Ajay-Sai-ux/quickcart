@@ -15,7 +15,7 @@ export const AppContextProvider = (props) => {
   const {user} = useUser();
 
   const [products, setProducts] = useState([]);
-  const [isSeller, setIsSeller] = useState(false);
+  // const [isSeller, setIsSeller] = useState(true);
   // const [userData, setUserData] = useState(false);
   // const [cartItems, setCartItems] = useState({});
 
@@ -45,7 +45,7 @@ export const AppContextProvider = (props) => {
       console.error("Failed to fetch products from Supabase:", err.message);
     }
   };
-
+  
 
   // const addToCart = async (itemId) => {
   //   const cartData = structuredClone(cartItems);
@@ -84,8 +84,8 @@ export const AppContextProvider = (props) => {
     router,
     products,
     fetchProductData,
-    isSeller,
-    setIsSeller,
+    // isSeller,
+    // setIsSeller,
     // cartItems,
     // setCartItems,
     // addToCart,

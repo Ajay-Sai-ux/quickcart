@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
           {currency}
           {product.offerPrice}
         </p>
-        <button className={styles.buyBtn}>Buy now</button>
+        {/* <button className={styles.buyBtn}>Buy now</button> */}
       </div>
     </div>
   );
