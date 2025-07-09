@@ -4,9 +4,9 @@ import HeaderSlider from "@/components/HeaderSlider";
 import HomeProducts from "@/components/HomeProducts/HomeProducts";
 import Banner from "@/components/Banner";
 import NewsLetter from "@/components/NewsLetter";
-import FeaturedProduct from "@/components/FeaturedProduct";
+import FeaturedProduct from "@/components/FeaturedProduct/FeaturedProduct";
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import styles from "./Home.module.scss";
 
 

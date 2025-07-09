@@ -1,0 +1,92 @@
+/* styles/Footer.module.scss */
+
+.footer {
+  border-top: 1px solid transparent;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 24px;
+
+  .topSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.5rem;
+    border-bottom: 1px solid rgba(107, 114, 128, 0.3); // Tailwind's gray-500/30
+    color: #6b7280; // Tailwind's gray-500
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    @media (min-width: 1024px) {
+    }
+  }
+
+  .logoSection {
+    width: 80%;
+
+    img {
+      width: 7rem;
+
+      @media (min-width: 768px) {
+        width: 8rem;
+      }
+    }
+
+    p {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .companyLinks,
+  .contactInfo {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+
+    @media (min-width: 768px) {
+      justify-content: center;
+    }
+
+    h2 {
+      font-weight: 500;
+      color: #111827; // Tailwind's gray-900
+      margin-bottom: 1.25rem;
+    }
+
+    ul,
+    .info {
+      font-size: 0.875rem;
+
+      li,
+      p {
+        margin-bottom: 0.5rem;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          transition: all 0.2s ease;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .bottomText {
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 1rem 0;
+
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+}

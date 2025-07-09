@@ -1,7 +1,7 @@
 'use client'
 import ProductCard from "@/components/ProductCard/ProductCard";
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import { useAppContext } from "@/context/AppContext";
 
 const AllProducts = () => {
