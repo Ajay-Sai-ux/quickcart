@@ -1,0 +1,193 @@
+.container {
+  padding: 3.5rem 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 3.5rem 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 3.5rem 8rem;
+  }
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.imageMain {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: rgba(107, 114, 128, 0.1); // Tailwind gray-500/10
+  margin-bottom: 1rem;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+}
+
+.imageThumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  .thumbnail {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: rgba(107, 114, 128, 0.1);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: rgba(31, 41, 55, 0.9);
+    margin-bottom: 1rem;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .stars {
+      display: flex;
+      gap: 0.125rem;
+    }
+  }
+
+  .description {
+    margin-top: 0.75rem;
+    color: #4b5563;
+  }
+
+  .price {
+    margin-top: 1.5rem;
+    font-size: 1.875rem;
+    font-weight: 500;
+
+    .original {
+      font-size: 1rem;
+      font-weight: 400;
+      text-decoration: line-through;
+      margin-left: 0.5rem;
+      color: rgba(31, 41, 55, 0.6);
+    }
+  }
+
+  hr {
+    margin: 1.5rem 0;
+    background-color: #4b5563;
+  }
+
+  table {
+    width: 100%;
+    max-width: 18rem;
+    font-size: 0.875rem;
+
+    td {
+      padding: 0.25rem 0;
+    }
+
+    .label {
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .value {
+      color: rgba(31, 41, 55, 0.5);
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+
+    button {
+      flex: 1;
+      padding: 0.875rem 0;
+      transition: background 0.3s;
+
+      &.addToCart {
+        background-color: #f3f4f6;
+        color: rgba(31, 41, 55, 0.8);
+
+        &:hover {
+          background-color: #e5e7eb;
+        }
+      }
+
+      &.buyNow {
+        background-color: #f97316;
+        color: white;
+
+        &:hover {
+          background-color: #ea580c;
+        }
+      }
+    }
+  }
+}
+
+.featured {
+  margin-top: 4rem;
+  text-align: center;
+
+  .heading {
+    font-size: 1.875rem;
+    font-weight: 500;
+
+    span {
+      color: #ea580c;
+    }
+  }
+
+  .underline {
+    width: 7rem;
+    height: 2px;
+    background-color: #ea580c;
+    margin: 0.5rem auto;
+  }
+
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-bottom: 3.5rem;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}

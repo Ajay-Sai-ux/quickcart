@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
     <div
       onClick={() => {
         router.push("/product/" + product._id);
-        scrollTo(0, 0);
+        // scrollTo(0, 0);
       }}
       className={styles.card}
     >

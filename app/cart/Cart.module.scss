@@ -1,0 +1,166 @@
+// Cart.module.scss
+
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 3.5rem 1.5rem 5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: 3.5rem 4rem 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 3.5rem 8rem 5rem;
+  }
+}
+
+.cartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(107, 114, 128, 0.3);
+
+  .title {
+    font-size: 1.5rem;
+    color: #6b7280;
+
+    @media (min-width: 768px) {
+      font-size: 1.875rem;
+    }
+
+    .highlight {
+      font-weight: 500;
+      color: #ea580c;
+    }
+  }
+
+  .itemCount {
+    font-size: 1.125rem;
+    color: rgba(107, 114, 128, 0.8);
+
+    @media (min-width: 768px) {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.tableWrapper {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+
+    th {
+      padding-bottom: 1.5rem;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      color: #4b5563;
+      font-weight: 500;
+
+      @media (min-width: 768px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    td {
+      padding: 1rem 0.25rem;
+
+      @media (min-width: 768px) {
+        padding: 1rem 1rem;
+      }
+    }
+  }
+
+  .productInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .imageWrapper {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      background-color: rgba(107, 114, 128, 0.1);
+      overflow: hidden;
+    }
+
+    .details {
+      display: none;
+      font-size: 0.875rem;
+
+      @media (min-width: 768px) {
+        display: block;
+      }
+
+      p {
+        color: #1f2937;
+      }
+
+      .removeBtn {
+        font-size: 0.75rem;
+        color: #ea580c;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .removeBtnMobile {
+      display: block;
+      font-size: 0.75rem;
+      color: #ea580c;
+      margin-top: 0.25rem;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
+  .price,
+  .subtotal {
+    color: #4b5563;
+  }
+
+  .quantityControl {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    @media (min-width: 768px) {
+      gap: 0.5rem;
+    }
+
+    input {
+      width: 2rem;
+      border: 1px solid #d1d5db;
+      text-align: center;
+      appearance: none;
+    }
+
+    button img {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.continueShopping {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: #ea580c;
+
+  img {
+    transition: transform 0.2s;
+  }
+
+  &:hover img {
+    transform: translateX(-0.25rem);
+  }
+}

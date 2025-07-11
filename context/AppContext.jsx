@@ -1,9 +1,8 @@
-'use client';
+"use client";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient"; // ✅ import supabase client
+import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@clerk/nextjs";
-
 
 export const AppContext = createContext();
 export const useAppContext = () => useContext(AppContext);
@@ -12,16 +11,12 @@ export const AppContextProvider = (props) => {
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "₹";
   const router = useRouter();
 
-  const {user} = useUser();
-
   const [products, setProducts] = useState([]);
-  // const [isSeller, setIsSeller] = useState(true);
-  // const [userData, setUserData] = useState(false);
-  // const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState([]);
 
-  
+  const { user, isLoaded } = useUser();
 
-  // ✅ Updated: Fetch product data from Supabase
+  // ✅ Fetch all products
   const fetchProductData = async () => {
     try {
       const { data, error } = await supabase
@@ -31,10 +26,9 @@ export const AppContextProvider = (props) => {
 
       if (error) throw error;
 
-      // Format for ProductCard component
       const formatted = data.map((item) => ({
         ...item,
-        _id: item.id, // match frontend code
+        _id: item.id,
         image: item.image_urls,
         offerPrice: item.offer_price,
         price: item.price,
@@ -45,58 +39,145 @@ export const AppContextProvider = (props) => {
       console.error("Failed to fetch products from Supabase:", err.message);
     }
   };
-  
 
-  // const addToCart = async (itemId) => {
-  //   const cartData = structuredClone(cartItems);
-  //   cartData[itemId] = (cartData[itemId] || 0) + 1;
-  //   setCartItems(cartData);
-  // };
+  // ✅ Add item to cart
+  const addToCart = async (productId) => {
+    if (!isLoaded) return;
 
-  // const updateCartQuantity = async (itemId, quantity) => {
-  //   const cartData = structuredClone(cartItems);
-  //   if (quantity === 0) delete cartData[itemId];
-  //   else cartData[itemId] = quantity;
-  //   setCartItems(cartData);
-  // };
+    if (!user) {
+      alert("Please sign in to add items to cart.");
+      return;
+    }
 
-  // const getCartCount = () =>
-  //   Object.values(cartItems).reduce((sum, qty) => sum + qty, 0);
+    const userId = user.id;
 
-  // const getCartAmount = () => {
-  //   let total = 0;
-  //   for (const itemId in cartItems) {
-  //     const product = products.find((p) => p._id == itemId);
-  //     if (product) {
-  //       total += product.offerPrice * cartItems[itemId];
-  //     }
-  //   }
-  //   return Math.floor(total * 100) / 100;
-  // };
+    // Step 1: Check if cart exists
+    let { data: cartData, error: cartError } = await supabase
+      .from("carts")
+      .select("*")
+      .eq("user_id", userId)
+      .single();
+
+    // Step 2: If not, create a cart
+    if (!cartData) {
+      const { data: newCart, error: createError } = await supabase
+        .from("carts")
+        .insert({ user_id: userId })
+        .select()
+        .single();
+
+      if (createError || !newCart) {
+        console.error("Failed to create cart:", createError?.message);
+        return;
+      }
+
+      cartData = newCart;
+    }
+
+    const cartId = cartData.id;
+
+    // Step 3: Check if product already in cart
+    const { data: existingItem } = await supabase
+      .from("cart_items")
+      .select("id, quantity")
+      .eq("cart_id", cartId)
+      .eq("product_id", productId)
+      .single();
+
+    // Step 4: Update or Insert
+    if (existingItem) {
+      await supabase
+        .from("cart_items")
+        .update({ quantity: existingItem.quantity + 1 })
+        .eq("id", existingItem.id);
+    } else {
+      await supabase.from("cart_items").insert({
+        cart_id: cartId,
+        product_id: productId,
+        quantity: 1,
+      });
+    }
+
+    alert("Added to cart!");
+    fetchCartItems(); // Refresh cart
+  };
+
+  // ✅ Fetch all items in cart
+  const fetchCartItems = async () => {
+    if (!isLoaded || !user) return;
+
+    const userId = user.id;
+
+    // Get cart
+    const { data: cart, error: cartError } = await supabase
+      .from("carts")
+      .select("id")
+      .eq("user_id", userId)
+      .single();
+
+    if (cartError || !cart) return;
+
+    const cartId = cart.id;
+
+    // Get cart items + product info
+    const { data: items, error } = await supabase
+      .from("cart_items")
+      .select(
+        `
+        id,
+        quantity,
+        added_at,
+        product:products (
+          id,
+          name,
+          price,
+          offer_price,
+          image_urls
+        )
+      `
+      )
+      .eq("cart_id", cartId);
+
+    if (error) {
+      console.error("Failed to fetch cart items:", error.message);
+      return;
+    }
+
+    setCartItems(items);
+  };
+
+  const updateCartQuantity = async (cartItemId, newQuantity) => {
+  if (newQuantity <= 0) {
+    // Remove item
+    await supabase.from("cart_items").delete().eq("id", cartItemId);
+  } else {
+    // Update quantity
+    await supabase
+      .from("cart_items")
+      .update({ quantity: newQuantity })
+      .eq("id", cartItemId);
+  }
+  fetchCartItems(); // Refresh cart
+};
 
   useEffect(() => {
     fetchProductData();
-  }, []);
+    if (user && isLoaded) fetchCartItems();
+  }, [user, isLoaded]);
 
   const value = {
     user,
     currency,
     router,
     products,
+    cartItems,
     fetchProductData,
-    // isSeller,
-    // setIsSeller,
-    // cartItems,
-    // setCartItems,
-    // addToCart,
-    // updateCartQuantity,
-    // getCartCount,
-    // getCartAmount,
+    fetchCartItems,
+    addToCart,
+    updateCartQuantity
   };
 
   return (
-    <AppContext.Provider value={value}>
-      {props.children}
-    </AppContext.Provider>
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
 };
