@@ -8,59 +8,55 @@ import { useClerk, UserButton } from "@clerk/nextjs";
 import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
-  const { isSeller,  user, router } = useAppContext();
+  const { isSeller, user, router } = useAppContext();
   const { openSignIn } = useClerk();
-  
 
   return (
-    <nav className={styles.navbar}>
-      <Image
-        className={styles.logo}
-        onClick={() => router.push("/")}
-        src={assets.logo}
-        alt="logo"
-      />
+    <nav className={styles.container}>
+      <div className={styles.navbar}>
+        <Image
+          className={styles.logo}
+          onClick={() => router.push("/")}
+          src={assets.logo}
+          alt="logo"
+        />
 
-      <div className={styles.navLinks}>
-        <Link href="/">Home</Link>
-        <Link href="/all-products">Shop</Link>
-        <Link href="/">About Us</Link>
-        <Link href="/">Contact</Link>
-        {isSeller && (
-          <button
-            onClick={() => router.push("/seller")}
-            className={styles.sellerButton}
-          >
-            Seller Dashboard
-          </button>
-        )}
-      </div>
+        <div className={styles.navLinks}>
+          <Link href="/">Home</Link>
+          <Link href="/all-products">Shop</Link>
+          <Link href="/">About Us</Link>
+          <Link href="/">Contact</Link>
+        </div>
 
-      <ul className={styles.icons}>
-        {/* <Image
-          className={styles.icon}
-          src={assets.search_icon}
-          alt="search icon"
-        /> */}
-        {user ? (
-          <>
+        <ul className={styles.icons}>
+          {user ? (
             <>
-            <UserButton>
-              <UserButton.MenuItems>
-                <UserButton.Action onClick={() => router.push('/cart')} label="Cart" labelIcon={<CartIcon />} />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action onClick={() => router.push("/my-orders")} label="My Orders" labelIcon={<CartIcon />} />
-              </UserButton.MenuItems>
-            </UserButton>
-          </>
-          </>
-        ) : (
-          <button onClick={openSignIn} className={styles.account}>
-            Login / Sign Up
-          </button>
-        )}
-      </ul>
+              <>
+                <UserButton>
+                  <UserButton.MenuItems>
+                    <UserButton.Action
+                      onClick={() => router.push("/cart")}
+                      label="Cart"
+                      labelIcon={<CartIcon />}
+                    />
+                  </UserButton.MenuItems>
+                  <UserButton.MenuItems>
+                    <UserButton.Action
+                      onClick={() => router.push("/my-orders")}
+                      label="My Orders"
+                      labelIcon={<CartIcon />}
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
+              </>
+            </>
+          ) : (
+            <button onClick={openSignIn} className={styles.account}>
+              Login
+            </button>
+          )}
+        </ul>
+      </div>
 
       <div className={styles.mobileRight}>
         {isSeller && (
@@ -75,16 +71,24 @@ const Navbar = () => {
           <>
             <UserButton>
               <UserButton.MenuItems>
-                <UserButton.Action onClick={() => router.push("/cart")} label="Cart" labelIcon={<CartIcon />} />
+                <UserButton.Action
+                  onClick={() => router.push("/cart")}
+                  label="Cart"
+                  labelIcon={<CartIcon />}
+                />
               </UserButton.MenuItems>
               <UserButton.MenuItems>
-                <UserButton.Action onClick={() => router.push("/my-orders")} label="My Orders" labelIcon={<BagIcon />} />
+                <UserButton.Action
+                  onClick={() => router.push("/my-orders")}
+                  label="My Orders"
+                  labelIcon={<BagIcon />}
+                />
               </UserButton.MenuItems>
             </UserButton>
           </>
         ) : (
           <button onClick={openSignIn} className={styles.account}>
-            Login / Sign Up
+            Login
           </button>
         )}
       </div>

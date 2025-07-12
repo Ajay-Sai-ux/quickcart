@@ -15,7 +15,7 @@ const Home = () => {
     <>
       <Navbar />
       <div className={styles.pageWrapper}>
-        <HeaderSlider />
+        <HeaderSlider className={styles.headerSlider} />
         <HomeProducts />
         <FeaturedProduct />
         <Banner />

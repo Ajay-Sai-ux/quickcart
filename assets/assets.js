@@ -46,8 +46,21 @@ import product_details_page_apple_earphone_image2 from "./product_details_page_a
 import product_details_page_apple_earphone_image3 from "./product_details_page_apple_earphone_image3.png";
 import product_details_page_apple_earphone_image4 from "./product_details_page_apple_earphone_image4.png";
 import product_details_page_apple_earphone_image5 from "./product_details_page_apple_earphone_image5.png";
+import banner from "./banner.jpg";
+import close from "./svgexport-3.svg";
+import person from "./svgexport-6.svg";
+import search from "./svgexport-11.svg";
+import hundred from "./svgexport-10.svg";
+import bag from "./svgexport-16.svg";
+
 
 export const assets = {
+  bag,
+  close,
+  person,
+  search,
+  hundred,
+  banner,
   logo,
   search_icon,
   user_icon,
